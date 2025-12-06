@@ -28,8 +28,6 @@ The final solution includes:
 - Scenario-based discount optimization
 - A final Product × Season discount calendar
 
-Full academic report is available in `/reports/FDA_AZIN_GHASEMI_SE.pdf`.
-
 ## Repository Structure
 
 ```
@@ -59,7 +57,6 @@ Full academic report is available in `/reports/FDA_AZIN_GHASEMI_SE.pdf`.
 │   └── discount_optimizer.py
 │
 ├── reports/
-│   ├── FDA_AZIN_GHASEMI_SE.pdf
 │   └── figures/
 │
 ├── requirements.txt
@@ -71,7 +68,7 @@ Full academic report is available in `/reports/FDA_AZIN_GHASEMI_SE.pdf`.
 
 The dataset contains daily sales information for 5 stores and 5 product categories, with this project focusing on Groceries.
 
-According to the variable table (page 13 of the report), the dataset includes:
+The dataset includes:
 
 - Date
 - Store & Product identifiers
@@ -89,25 +86,25 @@ The grocery category contains 30,400 rows and 16 features.
 
 The EDA phase includes:
 
-**Histograms of all numeric variables (p.15)**
+**Histograms of all numeric variables**
 - Used to detect skewness and decide on normalization.
 
-**Correlation Heatmap (p.20)**
+**Correlation Heatmap**
 - Shows strongest correlations with Demand, helping with feature selection.
 
-**Seasonal & Monthly Patterns (p.21–24)**
+**Seasonal & Monthly Patterns**
 - Heatmaps revealed:
   - Strong seasonality in some products
   - Large demand shifts during epidemic months
   - Monthly trends differ between 2022 and 2023
   - Epidemic effect is a critical forecasting feature
 
-**Epidemic Impact (p.23–24)**
+**Epidemic Impact**
 - A major cause of forecast error and deviation in seasonal patterns.
 
 ## Feature Engineering
 
-**Time-based features (p.25)**
+**Time-based features**
 - Created using Pandas:
   - Year
   - Month
@@ -118,7 +115,7 @@ The EDA phase includes:
   - Is month start / end
   - Quarter
 
-**Interpolated Order (custom feature) (p.17–18)**
+**Interpolated Order (custom feature)**
 - Because "Units Ordered" had many zeros, the following was created:
   - `Interpolated_Order = Last_Order_Amount / Days_Since_Last_Order`
 - This helped reduce sparsity and improved model performance.
@@ -131,22 +128,22 @@ The EDA phase includes:
 Three models were trained and compared, each using various feature sets and split strategies:
 
 ### 1. Linear Regression
-- Best R²: 74% using time-based split and all features. (p.35)
+- Best R²: 74% using time-based split and all features.
 
 ### 2. Random Forest
-- Best R²: 83% using 5-fold CV and full feature set. (p.35–36)
+- Best R²: 83% using 5-fold CV and full feature set.
 
 ### 3. XGBoost (Best Model)
 - Best R²: 90%
 - Using:
   - Feature Set 2
   - Time split
-  - Hyperparameter configuration xgb_3 (p.32, 36)
+  - Hyperparameter configuration xgb_3
 - XGBoost's robustness to non-linear patterns and mixed feature types made it the top performer.
 
 ## Error Analysis
 
-Monthly error heatmap (p.37) showed:
+Monthly error heatmap showed:
 
 - Highest errors occur during epidemic periods
 - Suggesting epidemic flags are essential features
@@ -162,8 +159,6 @@ The discount engine performs:
    - `revenue = pred_demand * price * (1 - discount / 100)`
 4. Select the discount that produces maximum revenue
 5. Build a Season × Product discount calendar
-
-Final calendar visual is shown on page 40 of the report.
 
 ## Final Output: Discount Calendar
 
@@ -182,8 +177,6 @@ The CSV and heatmap image are included in the repo.
 
 ## Key Business Insights
 
-From the discussion section (p.41):
-
 - Demand forecasting helps reduce food waste
 - Seasonal discounting stabilizes inventory levels
 - Low-demand products should be bundled with high-demand ones
@@ -191,8 +184,6 @@ From the discussion section (p.41):
 - Epidemic conditions materially affect demand and pricing strategy
 
 ## Limitations & Future Work
-
-(p.41–42 of the report)
 
 - Only two years of data → limited seasonality learning
 - Epidemic periods distort model stability
