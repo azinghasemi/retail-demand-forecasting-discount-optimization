@@ -41,22 +41,25 @@ def clean_retail_data(df):
         if df_clean[col].isnull().sum() > 0:
             df_clean[col].fillna(df_clean[col].median(), inplace=True)
     
-    # Remove outliers (using IQR method for sales)
-    if 'sales' in df_clean.columns or 'Sales' in df_clean.columns:
-        sales_col = 'sales' if 'sales' in df_clean.columns else 'Sales'
-        Q1 = df_clean[sales_col].quantile(0.25)
-        Q3 = df_clean[sales_col].quantile(0.75)
+    # Remove outliers (using IQR method for sales/demand)
+    target_cols = ['Demand', 'demand', 'sales', 'Sales', 'Unit Sold', 'Units Sold']
+    target_col = None
+    for col in target_cols:
+        if col in df_clean.columns:
+            target_col = col
+            break
+    
+    if target_col:
+        Q1 = df_clean[target_col].quantile(0.25)
+        Q3 = df_clean[target_col].quantile(0.75)
         IQR = Q3 - Q1
         lower_bound = Q1 - 1.5 * IQR
         upper_bound = Q3 + 1.5 * IQR
-        df_clean = df_clean[(df_clean[sales_col] >= lower_bound) & 
-                           (df_clean[sales_col] <= upper_bound)]
-    
-    # Ensure sales values are positive
-    if 'sales' in df_clean.columns:
-        df_clean = df_clean[df_clean['sales'] > 0]
-    elif 'Sales' in df_clean.columns:
-        df_clean = df_clean[df_clean['Sales'] > 0]
+        df_clean = df_clean[(df_clean[target_col] >= lower_bound) & 
+                           (df_clean[target_col] <= upper_bound)]
+        
+        # Ensure target values are positive
+        df_clean = df_clean[df_clean[target_col] > 0]
     
     print(f"Data cleaned: {df_clean.shape[0]} rows remaining")
     return df_clean

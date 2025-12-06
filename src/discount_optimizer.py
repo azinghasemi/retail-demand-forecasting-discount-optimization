@@ -173,6 +173,8 @@ def create_discount_calendar(df, model, feature_cols, date_col='date',
     """
     Create optimized discount calendar for future dates.
     
+    Note: For Season × Product discount calendar, use discount_calendar.py
+    
     Parameters:
     -----------
     df : pd.DataFrame
