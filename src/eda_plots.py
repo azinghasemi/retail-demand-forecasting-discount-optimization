@@ -43,6 +43,7 @@ def plot_sales_over_time(df, date_col='date', sales_col='sales', save_path=None)
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"Plot saved to {save_path}")
+    plt.show()
     plt.close()
 
 
@@ -82,6 +83,7 @@ def plot_seasonal_heatmap(df, date_col='date', sales_col='sales', save_path=None
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"Plot saved to {save_path}")
+    plt.show()
     plt.close()
 
 
@@ -114,6 +116,7 @@ def plot_correlation_heatmap(df, save_path=None):
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"Plot saved to {save_path}")
+    plt.show()
     plt.close()
 
 
@@ -148,6 +151,7 @@ def plot_feature_importance(importance_dict, save_path=None):
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"Plot saved to {save_path}")
+    plt.show()
     plt.close()
 
 
@@ -187,5 +191,6 @@ def plot_model_comparison(models_metrics, save_path=None):
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"Plot saved to {save_path}")
+    plt.show()
     plt.close()
 
