@@ -119,7 +119,8 @@ def plot_predictions_vs_actual(y_true, y_pred, model_name="Model", save_path=Non
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"Plot saved to {save_path}")
-    plt.close()
+    plt.show()
+    return fig
 
 
 def compare_models(models_results):

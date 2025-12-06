@@ -199,6 +199,7 @@ def create_discount_calendar_heatmap(calendar, product_col='Product ID',
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"Heatmap saved to {save_path}")
     
+    # Display the figure
     plt.show()
     return fig
 
